@@ -1,4 +1,4 @@
-module sync_fifo #(
+module desig_n #(
                    parameter DATA_W           = 128      ,        // Data width
                    parameter DEPTH            = 1024      ,        // Depth of FIFO                   
                    parameter UPP_TH           = 4      ,        // Upper threshold to generate Almost-full
@@ -28,7 +28,7 @@ logic [DATA_W - 1        : 0] data_rg [DEPTH] ;        // Data array
 logic [$clog2(DEPTH) - 1 : 0] wrptr_rg        ;        // Write pointer
 logic [$clog2(DEPTH) - 1 : 0] rdptr_rg        ;        // Read pointer
 logic [$clog2(DEPTH)     : 0] dcount_rg       ;        // Data counter
-logic ready_rg;      
+      logic ready_rg;
 logic                         wren_s          ;        // Write Enable signal generated iff FIFO is not full
 logic                         rden_s          ;        // Read Enable signal generated iff FIFO is not empty
 logic                         full_s          ;        // Full signal
@@ -46,8 +46,7 @@ always @ (posedge clk) begin
       wrptr_rg  <= 0              ;
       rdptr_rg  <= 0              ;      
       dcount_rg <= 0              ;
-     ready_rg <=0;
-
+           ready_rg <= 0;
    end
 
    else begin   
@@ -106,7 +105,7 @@ assign wren_s      = i_wren & !full_s                               ;
 assign rden_s      = i_rden & !empty_s                              ;
 
 // Full and Empty to output
-assign o_full      = full_s || !ready_rg                           ;
+assign o_full      = full_s  || !ready_rg                           ;
 assign o_empty     = empty_s                                        ;
 
 // Almost-full and Almost-empty to output
