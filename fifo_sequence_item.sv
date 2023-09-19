@@ -32,7 +32,7 @@ class fifo_sequence_item extends uvm_sequence_item;
     constraint c1 {{i_wren,i_rden} inside {2'b00,2'b01,2'b10,2'b11};}
 
 
-   //---------------------------------------
+   //------------ ---------------------------
   //Constructor
   //---------------------------------------
 
