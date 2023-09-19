@@ -7,7 +7,7 @@ import uvm_pkg::*;
 
  
 
-module testbench;
+module top;
   bit clk;
   bit rstn;
 
